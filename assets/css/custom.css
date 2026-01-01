@@ -1,8 +1,73 @@
 /* Add your own custom styles here */
 
+/* ==========================================================================
+   User Customization Guide
+   ==========================================================================
+   The main colors and fonts are defined in `data/theme.json`.
+   However, you can override specific visual effects here.
+   
+   To change the Glassmorphism blur or Card Hover intensity, edit the variables below.
+   ========================================================================== */
+
+:root {
+  --glass-blur: 12px;
+  --glass-opacity-light: 0.85;
+  --glass-opacity-dark: 0.85;
+  --card-hover-lift: -5px;
+}
+
+/* ==========================================================================
+   Glassmorphism Navbar
+   ========================================================================== */
+.header {
+  background-color: rgba(230, 244, 242, var(--glass-opacity-light)) !important;
+  /* Matches theme body */
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid rgba(179, 217, 212, 0.4);
+}
+
+.dark .header {
+  background-color: rgba(11, 25, 23, var(--glass-opacity-dark)) !important;
+  /* Matches dark theme body */
+  border-bottom: 1px solid rgba(163, 215, 206, 0.2);
+}
+
+/* Ensure sticky header sits above everything nicely with blur */
+.header.sticky {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* ==========================================================================
+   Blog Card Hover Effects
+   ========================================================================== */
+/* Targeting the inner card div within the grid column */
+.section .row .md\:col-6>div {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0.75rem;
+  /* More rounded for modern feel */
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.section .row .md\:col-6>div:hover {
+  transform: translateY(var(--card-hover-lift));
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .section .row .md\:col-6>div:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   Typography Enhancements
+   ========================================================================== */
 /* Custom styling for bold text */
 .content strong {
   color: var(--color-bold);
+  font-weight: 700;
 }
 
 /* For dark mode */
@@ -18,4 +83,21 @@
 /* For dark mode */
 .dark .content em {
   color: var(--color-darkmode-italic);
+}
+
+/* Add a subtle fade-in animation for page content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  animation: fadeIn 0.6s ease-out forwards;
 }

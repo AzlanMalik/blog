@@ -1,0 +1,42 @@
+{{ if or site.Params.logo site.Params.logo_darkmode }}
+  {{ if site.Params.logo }}
+    <div class="logo-image {{ if site.Params.logo_darkmode }}dark:hidden{{ end }}">
+      {{ $logo := resources.Get site.Params.logo }}
+      {{ if $logo }}
+        {{ $logoWidth := site.Params.logo_width | default "150px" | replaceRE "px" "" | int }}
+        {{ $logoHeight := site.Params.logo_height | default "40px" | replaceRE "px" "" | int }}
+        <img src="{{ $logo.RelPermalink }}" 
+             alt="{{ site.Title }}" 
+             style="height:{{ site.Params.logo_height }}; width:auto; max-width:{{ site.Params.logo_width }};"
+             class="img-fluid" 
+             width="{{ $logoWidth }}" 
+             height="{{ $logoHeight }}">
+      {{ else }}
+        <img src="{{ site.Params.logo | relURL }}" alt="{{ site.Title }}" class="img-fluid" style="height:{{ site.Params.logo_height }};">
+      {{ end }}
+    </div>
+  {{ end }}
+  
+  {{ if site.Params.logo_darkmode }}
+    <div class="logo-image hidden dark:block">
+      {{ $logoDark := resources.Get site.Params.logo_darkmode }}
+      {{ if $logoDark }}
+         {{ $logoWidth := site.Params.logo_width | default "150px" | replaceRE "px" "" | int }}
+         {{ $logoHeight := site.Params.logo_height | default "40px" | replaceRE "px" "" | int }}
+        <img src="{{ $logoDark.RelPermalink }}" 
+             alt="{{ site.Title }}" 
+             style="height:{{ site.Params.logo_height }}; width:auto; max-width:{{ site.Params.logo_width }};"
+             class="img-fluid"
+             width="{{ $logoWidth }}" 
+             height="{{ $logoHeight }}">
+      {{ else }}
+        <img src="{{ site.Params.logo_darkmode | relURL }}" alt="{{ site.Title }}" class="img-fluid" style="height:{{ site.Params.logo_height }};">
+      {{ end }}
+    </div>
+  {{ end }}
+{{ else }}
+  <!-- Premium Text Logo Implementation -->
+  <span class="text-2xl font-bold font-primary tracking-tight text-dark dark:text-white">
+    {{ site.Params.logo_text | default site.Title }}<span class="text-primary">.</span>
+  </span>
+{{ end }}
