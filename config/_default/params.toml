@@ -62,8 +62,7 @@ content = "You must replace the **baseURL** in **hugo.toml** file when deploying
 [metadata]
 keywords = ["Boilerplate", "Hugo"]
 description = "Hugo & Tailwindcss Starter"
-author = "zeon.studio"
-twitter = "zeon_studio"
+author = "azlan malik"
 image = "images/og-image.png"
 
 

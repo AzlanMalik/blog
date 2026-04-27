@@ -1,6 +1,6 @@
 ---
 title: Azlan Malik
-email: hello@azlanmalik.me
+email: hi@azlanmalik.com
 image: "/images/avatar.png"
 description: Hey there, I am Azlan. A Opensource enthusiast
 social:
