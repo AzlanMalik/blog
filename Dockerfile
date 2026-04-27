@@ -42,12 +42,15 @@ RUN git --version && \
     hugo version && \
     go version
 
+# Copy package files first to leverage Docker layer caching
+COPY package*.json ./
 
+RUN npm i
+
+# Then copy the rest of the application including .md files
 COPY . .
 
 RUN npm run project-setup
-    
-RUN npm i
 
 RUN npm run build
 
